@@ -1,0 +1,22 @@
+{
+  "name": "pm-library-app",
+  "version": "1.0.0",
+  "description": "Biblioteca",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vfranco/pm-library-app.git"
+  },
+  "keywords": [
+    "biblioteca"
+  ],
+  "author": "Pedro Jose",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vfranco/pm-library-app/issues"
+  },
+  "homepage": "https://github.com/Vfranco/pm-library-app#readme"
+}
