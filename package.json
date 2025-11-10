@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/Vfranco/pm-library-app/issues"
   },
-  "homepage": "https://github.com/Vfranco/pm-library-app#readme"
+  "homepage": "https://github.com/Vfranco/pm-library-app#readme",
+  "dependencies": {
+    "scanf": "^1.2.0"
+  }
 }
