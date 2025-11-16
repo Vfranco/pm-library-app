@@ -19,7 +19,11 @@
     "url": "https://github.com/Vfranco/pm-library-app/issues"
   },
   "homepage": "https://github.com/Vfranco/pm-library-app#readme",
-  "dependencies": {
-    "scanf": "^1.2.0"
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "webpack": "^5.102.1",
+    "webpack-cli": "^6.0.1"
   }
 }

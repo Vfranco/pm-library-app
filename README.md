@@ -1,8 +1,8 @@
-# Mi Biblioteca
+# Biblioteca PM
 
-Esta es una es una aplicación de estudio que estoy llevando
+Sistema de biblioteca virtual desarrollado con el fin de aprender.
 
-## Instrucciones para intalar
+## Instrucciones para instalar
 
 Clonar el Repositorio
 
@@ -10,8 +10,13 @@ Clonar el Repositorio
 git clone repo
 ```
 
-## Instalar Dependencias
+Instalar Dependencias
 
 ```bash
 npm install
+```
+
+Ejecutar en consola con el entorno de node
+```bash
+node dist/main.js
 ```
