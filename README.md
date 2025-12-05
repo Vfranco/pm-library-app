@@ -16,6 +16,11 @@ Instalar Dependencias
 npm install
 ```
 
+En caso de querer hacer cambios, posteriormente compilar con:
+````bash
+npx webpack
+````
+
 Ejecutar en consola con el entorno de node
 ```bash
 node dist/main.js
