@@ -8,58 +8,58 @@ export class MenuActions {
     ) { }
 
     registerBook() {
-        this.view.showMSG("Título del libro: ");
+        this.view.showMessage("Título del libro: ");
         const title = this.view.readInput();
 
-        this.view.showMSG("Autor del libro: ");
+        this.view.showMessage("Autor del libro: ");
         const author = this.view.readInput();
 
         this.library.registerBook(title, author);
 
-        this.view.showMSG("Libro registrado.");
+        this.view.showMessage("Libro registrado.");
     }
 
     deleteBook() {
-        this.view.showMSG("ID del libro a borrar: ");
+        this.view.showMessage("ID del libro a borrar: ");
         const id = this.view.readInput();
 
         this.library.deleteBook(id);
 
-        this.view.showMSG("Libro borrado.");
+        this.view.showMessage("Libro borrado.");
     }
 
     registerStudent() {
-        this.view.showMSG("Nombre del estudiante: ");
+        this.view.showMessage("Nombre del estudiante: ");
         const name = this.view.readInput();
 
         this.library.registerStudent(name);
 
-        this.view.showMSG("Estudiante registrado.");
+        this.view.showMessage("Estudiante registrado.");
     }
 
     deleteStudent() {
-        this.view.showMSG("ID del estudiante a borrar: ");
+        this.view.showMessage("ID del estudiante a borrar: ");
         const id = this.view.readInput();
 
         this.library.deleteStudent(id);
 
-        this.view.showMSG("Estudiante borrado.");
+        this.view.showMessage("Estudiante borrado.");
     }
 
     loanBook() {
         this.showStudents();
-        this.view.showMSG("ID del estudiante: ");
+        this.view.showMessage("ID del estudiante: ");
         const sid = this.view.readInput();
 
         this.showBooks();
-        this.view.showMSG("ID del libro: ");
+        this.view.showMessage("ID del libro: ");
         const bid = this.view.readInput();
 
         try {
             this.library.loanBook(sid, bid);
-            this.view.showMSG("Préstamo realizado.");
+            this.view.showMessage("Préstamo realizado.");
         } catch (err: any) {
-            this.view.showMSG(`Error: ${err.message}`);
+            this.view.showMessage(`Error: ${err.message}`);
         }
     }
 

@@ -3,7 +3,7 @@ import { Student } from "../entities/Student";
 
 export interface View {
     render(): void;
-    showMSG(message: string): void;
+    showMessage(message: string): void;
     readInput(prompt: string | null): string;
     showBookList(books: Book[]): void;
     showStudentList(students: Student[]): void;

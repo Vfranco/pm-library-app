@@ -28,29 +28,29 @@ export class Menu {
             const option = this.view.readInput();
             const action = map[option];
 
-            action ? action() : this.view.showMSG("Opción inválida.");
+            action ? action() : this.view.showMessage("Opción inválida.");
 
             if (option === "0") break;
 
-            this.view.showMSG("\nPresiona cualquier tecla para continuar...");
+            this.view.showMessage("\nPresiona cualquier tecla para continuar...");
             this.view.readInput();
         }
     }
 
     private printMenu() {
         this.view.render();
-        this.view.showMSG("\n1. Registrar libro");
-        this.view.showMSG("2. Borrar libro");
-        this.view.showMSG("3. Registrar estudiante");
-        this.view.showMSG("4. Borrar estudiante");
-        this.view.showMSG("5. Realizar préstamo");
-        this.view.showMSG("6. Mostrar libros");
-        this.view.showMSG("7. Mostrar estudiantes");
-        this.view.showMSG("0. Salir");
-        this.view.showMSG("\nOpción: ");
+        this.view.showMessage("\n1. Registrar libro");
+        this.view.showMessage("2. Borrar libro");
+        this.view.showMessage("3. Registrar estudiante");
+        this.view.showMessage("4. Borrar estudiante");
+        this.view.showMessage("5. Realizar préstamo");
+        this.view.showMessage("6. Mostrar libros");
+        this.view.showMessage("7. Mostrar estudiantes");
+        this.view.showMessage("0. Salir");
+        this.view.showMessage("\nOpción: ");
     }
 
     private exitProgram() {
-        this.view.showMSG("\n¡Hasta luego!");
+        this.view.showMessage("\n¡Hasta luego!");
     }
 }
