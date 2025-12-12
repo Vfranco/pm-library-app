@@ -2,6 +2,7 @@ import { Book } from "../entities/Book";
 import { Loan } from "../entities/Loan";
 import { Student } from "../entities/Student";
 import { Repository } from "../interfaces/Repository";
+import { LoanValidator } from "./ValidateLoan";
 
 export class LibrarySystem {
     constructor(
@@ -10,24 +11,44 @@ export class LibrarySystem {
         private loans: Repository<Loan>
     ) { }
 
-    registerBook(book: Book) {
+    registerBook(title: string, author: string) {
+        const book: Book = {
+            id: crypto.randomUUID(),
+            title,
+            author,
+            available: true
+        };
+
         this.books.save(book);
+        return book;
     }
 
-    registerStudent(student: Student) {
+    deleteBook(id: string) {
+        this.books.delete(id);
+    }
+
+    registerStudent(name: string) {
+        const student: Student = {
+            id: crypto.randomUUID(),
+            name
+        };
+
         this.students.save(student);
+        return student;
+    }
+
+    deleteStudent(id: string) {
+        this.students.delete(id);
     }
 
     loanBook(studentId: string, bookId: string) {
         const student = this.students.getById(studentId);
         const book = this.books.getById(bookId);
 
-        if (!student) throw new Error("Estudiante no existe");
-        if (!book) throw new Error("Libro no existe");
-        if (!book.available) throw new Error("Libro no disponible");
+        LoanValidator.validateLoan(student, book);
 
-        book.available = false;
-        this.books.update(book);
+        book!.available = false;
+        this.books.update(book!);
 
         const loan = new Loan(
             crypto.randomUUID(),
@@ -38,5 +59,13 @@ export class LibrarySystem {
 
         this.loans.save(loan);
         return loan;
+    }
+
+    getAllBooks() {
+        return this.books.getAll();
+    }
+
+    getAllStudents() {
+        return this.students.getAll();
     }
 }
