@@ -3,6 +3,6 @@ export class Loan {
         public id: string,
         public studentId: string,
         public bookId: string,
-        public date: Date = new Date()
+        public date: Date
     ) { }
 }
