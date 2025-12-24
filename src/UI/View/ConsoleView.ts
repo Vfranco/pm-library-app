@@ -1,6 +1,7 @@
 import { Book } from "../../core/entities/Book";
 import { View } from "../../core/interfaces/View";
 import { Student } from "../../core/entities/Student";
+import { Loan } from "../../core/entities/Loan";
 const scanf = require("scanf");
 export class ConsoleView implements View {
     render(): void {
@@ -17,34 +18,52 @@ export class ConsoleView implements View {
     }
 
     showBookList(books: Book[]): void {
-        this.showMessage("\nLibros disponibles:");
-        this.showMessage("-----------------------------------------------------------------------");
-        this.showMessage("Titulo                  Autor                 Disponible");
-        this.showMessage("-----------------------------------------------------------------------");
+        this.showMessage("\nLibros:");
+
+        const bookTable = books.map(book => ({
+            ID: book.id,
+            Título: book.title,
+            Autor: book.author,
+            Estado: book.available ? 'Disponible' : 'No disponible'
+        }));
+
         if (books.length === 0) {
-            this.showMessage("No hay libros registrados.");
+            console.log('No hay libros registrados.');
+            return;
         } else {
-            books.forEach(b => {
-                const status = b.available ? "Disponible" : "No disponible";
-                this.showMessage(`${b.title.padEnd(24)}${b.author.padEnd(22)}${status}`);
-                this.showMessage(`  ID: ${b.id}`);
-            });
+            console.table(bookTable);
         }
-        this.showMessage("-----------------------------------------------------------------------");
     }
 
     showStudentList(students: Student[]): void {
         this.showMessage("\nEstudiantes registrados:");
-        this.showMessage("------------------------------------------");
-        this.showMessage("Nombre                  ID");
-        this.showMessage("------------------------------------------");
+
+        const studentTable = students.map(student => ({
+            ID: student.id,
+            Nombre: student.name
+        }));
+
         if (students.length === 0) {
             this.showMessage("No hay estudiantes registrados.");
         } else {
-            students.forEach(s => {
-                this.showMessage(`${s.name.padEnd(24)}${s.id}`);
-            });
+            console.table(studentTable);
         }
-        this.showMessage("------------------------------------------");
+    }
+
+    showLoanList(loans: Loan[]): void {
+        this.showMessage("\nPréstamos:");
+
+        const loanTable = loans.map(loan => ({
+            'ID Préstamo': loan.id,
+            'ID Libro': loan.bookId,
+            'ID Estudiante': loan.studentId,
+            'Fecha Préstamo': loan.loanDate.toLocaleDateString(),
+        }));
+
+        if (loans.length === 0) {
+            this.showMessage("No hay préstamos registrados.");
+        } else {
+            console.table(loanTable);
+        }
     }
 }

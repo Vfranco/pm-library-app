@@ -1,29 +1,54 @@
-import { Book } from "../entities/Book";
 import { Loan } from "../entities/Loan";
-import { Student } from "../entities/Student";
 import { Repository } from "../interfaces/Repository";
+import { IdGenerator } from "../interfaces/IdGenerator";
+import { DateProvider } from "../interfaces/DateProvider";
 
 export class LoanService {
-    constructor(private repository: Repository<Loan>) { }
+    constructor(
+        private repository: Repository<Loan>,
+        private idGenerator: IdGenerator,
+        private dateProvider: DateProvider
+    ) { }
 
     createLoan(studentId: string, bookId: string): Loan {
         const loan = new Loan(
-            crypto.randomUUID(),
+            this.idGenerator.generate(),
             studentId,
             bookId,
-            new Date()
+            this.dateProvider.now(),
+            false
         );
+
         this.repository.save(loan);
         return loan;
     }
 
-    validateLoan(student: Student | null, book: Book | null): void {
-        if (!student) throw new Error("Estudiante no existe");
-        if (!book) throw new Error("Libro no existe");
-        if (!book.available) throw new Error("El libro no está disponible");
+    returnLoan(loanId: string): Loan {
+        const loan = this.repository.getById(loanId);
+        if (!loan) {
+            throw new Error("Préstamo no encontrado");
+        }
+        if (loan.returned) {
+            throw new Error("El préstamo ya fue devuelto");
+        }
+
+        loan.returned = true;
+        this.repository.update(loan);
+
+        return loan;
     }
 
     getAll(): Loan[] {
         return this.repository.getAll();
+    }
+
+    getById(id: string): Loan | null {
+        return this.repository.getById(id);
+    }
+
+    getActiveLoansByStudent(studentId: string): Loan[] {
+        return this.repository.getAll().filter(
+            loan => loan.studentId === studentId && !loan.returned
+        );
     }
 }

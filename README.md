@@ -25,5 +25,3 @@ Ejecutar en consola con el entorno de node
 ```bash
 node dist/main.js
 ```
-
-.
