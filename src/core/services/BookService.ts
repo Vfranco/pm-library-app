@@ -1,21 +1,34 @@
 import { Book } from "../entities/Book";
 import { Repository } from "../interfaces/Repository";
+import { IdGenerator } from "../interfaces/IdGenerator";
+import { BookValidator } from "../validators/BookValidator";
 
 export class BookService {
-    constructor(private repository: Repository<Book>) { }
+    constructor(
+        private repository: Repository<Book>, // Aquí tengo una duda
+        private idGenerator: IdGenerator,
+        private validator: BookValidator
+    ) { }
 
     register(title: string, author: string): Book {
-        const book: Book = {
-            id: crypto.randomUUID(),
-            title,
-            author,
-            available: true
-        };
+        this.validator.validateBookData(title, author);
+
+        const book = new Book(
+            this.idGenerator.generate(),
+            title.trim(),
+            author.trim(),
+            true
+        );
+
         this.repository.save(book);
         return book;
     }
 
     delete(id: string): void {
+        const book = this.repository.getById(id);
+        if (!book) {
+            throw new Error("Libro no encontrado");
+        }
         this.repository.delete(id);
     }
 

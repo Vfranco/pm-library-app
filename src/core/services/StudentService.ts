@@ -1,19 +1,31 @@
 import { Student } from "../entities/Student";
 import { Repository } from "../interfaces/Repository";
+import { StudentValidator } from "../validators/StudentValidator";
 
 export class StudentService {
-    constructor(private repository: Repository<Student>) { }
+    constructor(
+        private repository: Repository<Student>,
+        private validator: StudentValidator
+    ) { }
 
-    register(name: string): Student {
-        const student: Student = {
-            id: crypto.randomUUID(),
-            name
-        };
+    register(name: string, id: string): Student {
+        this.validator.validateStudentData(name, id);
+
+        const existingStudent = this.repository.getById(id);
+        if (existingStudent) {
+            throw new Error("Ya existe un estudiante con ese ID");
+        }
+
+        const student = new Student(id.trim(), name.trim());
+
         this.repository.save(student);
         return student;
     }
 
     delete(id: string): void {
+        if (!this.repository.getById(id)) {
+            throw new Error("ID de estudiante no encontrado");
+        }
         this.repository.delete(id);
     }
 
