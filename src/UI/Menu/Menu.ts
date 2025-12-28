@@ -24,9 +24,10 @@ export class Menu {
             new MenuOption("4", "Borrar estudiante", () => actions.deleteStudent()),
             new MenuOption("5", "Realizar préstamo", () => actions.loanBook()),
             new MenuOption("6", "Devolver Libro", () => actions.returnBook()),
-            new MenuOption("7", "Mostrar libros", () => actions.showBooks()),
-            new MenuOption("8", "Mostrar estudiantes", () => actions.showStudents()),
-            new MenuOption("9", "Ver préstamos activos por estudiante", () => actions.showActiveLoansByStudent()),
+            new MenuOption("7", "Borrar préstamo", () => actions.deleteLoan()),  // NUEVA OPCIÓN
+            new MenuOption("8", "Mostrar libros", () => actions.showBooks()),
+            new MenuOption("9", "Mostrar estudiantes", () => actions.showStudents()),
+            new MenuOption("10", "Ver préstamos activos por estudiante", () => actions.showActiveLoansByStudent()),
             new MenuOption("0", "Salir", () => this.exit())
         ];
     }

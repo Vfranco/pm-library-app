@@ -78,6 +78,27 @@ export class MenuActions {
         }
     }
 
+    deleteLoan(): void {
+        try {
+            const allLoans = this.library.loans.getAll();
+
+            if (allLoans.length === 0) {
+                this.view.showMessage("No hay préstamos registrados.");
+                return;
+            }
+
+            this.view.showLoanList(allLoans);
+
+            this.view.showMessage("\nID del préstamo a borrar: ");
+            const id = this.view.readInput();
+
+            this.library.loans.delete(id);
+            this.view.showMessage("Préstamo borrado exitosamente.");
+        } catch (err: any) {
+            this.view.showMessage(`Error: ${err.message}`);
+        }
+    }
+
     showBooks(): void {
         const books = this.library.books.getAll();
         this.view.showBookList(books);
