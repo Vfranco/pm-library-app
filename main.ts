@@ -1,3 +1,5 @@
+// Comentario para hacer commit del dist borrado
+
 import { LibrarySystem } from "./src/core/LibrarySystem";
 import { BookService } from "./src/core/services/BookService";
 import { StudentService } from "./src/core/services/StudentService";
