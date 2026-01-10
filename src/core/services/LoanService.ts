@@ -2,13 +2,18 @@ import { Loan } from "../entities/Loan";
 import { Repository } from "../interfaces/Repository";
 import { IdGenerator } from "../interfaces/IdGenerator";
 import { DateProvider } from "../interfaces/DateProvider";
+import { CrudRepository } from "../interfaces/CrudRepository";
 
-export class LoanService {
+export class LoanService implements CrudRepository<Loan> {
     constructor(
         private repository: Repository<Loan>,
         private idGenerator: IdGenerator,
         private dateProvider: DateProvider
     ) { }
+
+    register(studentId: string, bookId: string): Loan {
+        return this.createLoan(studentId, bookId);
+    }
 
     createLoan(studentId: string, bookId: string): Loan {
         const loan = new Loan(
@@ -44,6 +49,14 @@ export class LoanService {
 
     getById(id: string): Loan | null {
         return this.repository.getById(id);
+    }
+
+    delete(id: string): void {
+        const loan = this.repository.getById(id);
+        if (!loan) {
+            throw new Error("Préstamo no encontrado");
+        }
+        this.repository.delete(id);
     }
 
     getActiveLoansByStudent(studentId: string): Loan[] {

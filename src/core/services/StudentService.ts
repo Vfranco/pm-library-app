@@ -1,8 +1,9 @@
 import { Student } from "../entities/Student";
 import { Repository } from "../interfaces/Repository";
 import { StudentValidator } from "../validators/StudentValidator";
+import { CrudRepository } from "../interfaces/CrudRepository";
 
-export class StudentService {
+export class StudentService implements CrudRepository<Student> {
     constructor(
         private repository: Repository<Student>,
         private validator: StudentValidator
