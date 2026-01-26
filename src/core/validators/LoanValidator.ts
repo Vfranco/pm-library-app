@@ -1,8 +1,9 @@
 import { Book } from "../entities/Book";
 import { Student } from "../entities/Student";
+import { Validator } from "../interfaces/Validator";
 
-export class LoanValidator {
-    validateLoanData(student: Student | null, book: Book | null): void {
+export class LoanValidator implements Validator {
+    validate(student: Student | null, book: Book | null): void {
         if (!student) {
             throw new Error("Estudiante no existe");
         }

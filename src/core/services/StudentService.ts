@@ -10,7 +10,7 @@ export class StudentService implements CrudRepository<Student> {
     ) { }
 
     register(name: string, id: string): Student {
-        this.validator.validateStudentData(name, id);
+        this.validator.validate(name, id);
 
         const existingStudent = this.repository.getById(id);
         if (existingStudent) {

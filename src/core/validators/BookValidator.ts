@@ -1,5 +1,6 @@
-export class BookValidator {
-    validateBookData(title: string, author: string): void {
+import { Validator } from "../interfaces/Validator";
+export class BookValidator implements Validator {
+    validate(title: string, author: string): void {
         if (!title || title.trim().length === 0) {
             throw new Error("El título no puede estar vacío");
         }

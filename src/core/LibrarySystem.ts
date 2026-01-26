@@ -16,7 +16,7 @@ export class LibrarySystem {
         const student = this.students.getById(studentId);
         const book = this.books.getById(bookId);
 
-        this.loanValidator.validateLoanData(student, book);
+        this.loanValidator.validate(student, book);
 
         this.books.markAsUnavailable(book!);
 
