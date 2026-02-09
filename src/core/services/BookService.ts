@@ -12,7 +12,7 @@ export class BookService implements CrudRepository<Book> {
     ) { }
 
     register(title: string, author: string): Book {
-        this.validator.validateBookData(title, author);
+        this.validator.validate(title, author);
 
         const book = new Book(
             this.idGenerator.generate(),

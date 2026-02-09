@@ -1,5 +1,7 @@
-export class StudentValidator {
-    validateStudentData(name: string, id: string): void {
+import { Validator } from "../interfaces/Validator";
+
+export class StudentValidator implements Validator {
+    validate(name: string, id: string): void {
         if (!name || name.trim().length === 0) {
             throw new Error("El nombre no puede estar vacío");
         }
