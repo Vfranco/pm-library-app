@@ -1,3 +1,4 @@
+import { Service } from "../core/interfaces/Service";
 import { BookService } from "../core/services/BookService";
 import { StudentService } from "../core/services/StudentService";
 import { LoanService } from "../core/services/LoanService";
@@ -6,46 +7,27 @@ import { IdGenerator } from "../core/interfaces/IdGenerator";
 import { DateProvider } from "../core/interfaces/DateProvider";
 import { BookValidator } from "../core/validators/BookValidator";
 import { StudentValidator } from "../core/validators/StudentValidator";
-import { Book } from "../core/entities/Book";
-import { Student } from "../core/entities/Student";
-import { Loan } from "../core/entities/Loan";
 
 export class ServiceFactory {
-    private bookValidator: BookValidator;
-    private studentValidator: StudentValidator;
+    private dependencies: Map<any, any[]>;
 
     constructor(
         private repositoryFactory: RepositoryFactory,
         private idGenerator: IdGenerator,
         private dateProvider: DateProvider
     ) {
-        this.bookValidator = new BookValidator();
-        this.studentValidator = new StudentValidator();
+        const bookValidator = new BookValidator();
+        const studentValidator = new StudentValidator();
+
+        this.dependencies = new Map();
+        this.dependencies.set(BookService, [this.idGenerator, bookValidator]);
+        this.dependencies.set(StudentService, [studentValidator]);
+        this.dependencies.set(LoanService, [this.idGenerator, this.dateProvider]);
     }
 
-    createBookService(): BookService {
-        const bookRepository = this.repositoryFactory.createRepository<Book>();
-        return new BookService(
-            bookRepository,
-            this.idGenerator,
-            this.bookValidator
-        );
-    }
-
-    createStudentService(): StudentService {
-        const studentRepository = this.repositoryFactory.createRepository<Student>();
-        return new StudentService(
-            studentRepository,
-            this.studentValidator
-        );
-    }
-
-    createLoanService(): LoanService {
-        const loanRepository = this.repositoryFactory.createRepository<Loan>();
-        return new LoanService(
-            loanRepository,
-            this.idGenerator,
-            this.dateProvider
-        );
+    createService<T extends Service<any>>(ServiceClass: new (...args: any[]) => T): T {
+        const repository = this.repositoryFactory.createRepository();
+        const deps = this.dependencies.get(ServiceClass) || [];
+        return new ServiceClass(repository, ...deps);
     }
 }

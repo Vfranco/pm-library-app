@@ -1,4 +1,4 @@
-export interface CrudRepository<T> {
+export interface Service<T> {
     register(...args: any[]): T;
     delete(id: string): void;
     getById(id: string): T | null;

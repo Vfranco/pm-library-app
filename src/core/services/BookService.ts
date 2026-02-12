@@ -2,9 +2,9 @@ import { Book } from "../entities/Book";
 import { Repository } from "../interfaces/Repository";
 import { IdGenerator } from "../interfaces/IdGenerator";
 import { BookValidator } from "../validators/BookValidator";
-import { CrudRepository } from "../interfaces/CrudRepository";
+import { Service } from "../interfaces/Service";
 
-export class BookService implements CrudRepository<Book> {
+export class BookService implements Service<Book> {
     constructor(
         private repository: Repository<Book>,
         private idGenerator: IdGenerator,

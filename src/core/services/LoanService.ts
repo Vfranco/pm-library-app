@@ -2,9 +2,9 @@ import { Loan } from "../entities/Loan";
 import { Repository } from "../interfaces/Repository";
 import { IdGenerator } from "../interfaces/IdGenerator";
 import { DateProvider } from "../interfaces/DateProvider";
-import { CrudRepository } from "../interfaces/CrudRepository";
+import { Service } from "../interfaces/Service";
 
-export class LoanService implements CrudRepository<Loan> {
+export class LoanService implements Service<Loan> {
     constructor(
         private repository: Repository<Loan>,
         private idGenerator: IdGenerator,
