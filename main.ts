@@ -6,6 +6,10 @@ import { ConsoleView } from "./src/UI/View/ConsoleView";
 import { Menu } from "./src/UI/Menu/Menu";
 import { RepositoryFactory } from "./src/factories/RepositoryFactory";
 import { ServiceFactory } from "./src/factories/ServiceFactory";
+import { BookService } from "./src/core/services/BookService";
+import { Student } from "./src/core/entities/Student";
+import { StudentService } from "./src/core/services/StudentService";
+import { LoanService } from "./src/core/services/LoanService";
 
 const idGenerator = new CryptoIdGenerator();
 const dateProvider = new SystemDateProvider();
@@ -17,9 +21,9 @@ const serviceFactory = new ServiceFactory(
     dateProvider
 );
 
-const bookService = serviceFactory.createBookService();
-const studentService = serviceFactory.createStudentService();
-const loanService = serviceFactory.createLoanService();
+const bookService = serviceFactory.createService(BookService);
+const studentService = serviceFactory.createService(StudentService);
+const loanService = serviceFactory.createService(LoanService);
 
 const loanValidator = new LoanValidator();
 const library = new LibrarySystem(
