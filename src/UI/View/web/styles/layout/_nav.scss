@@ -1,0 +1,54 @@
+@use '../globals/variables' as *;
+
+.sidebar-nav {
+  padding: 1.6rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  padding: 1.2rem 1.6rem;
+  background: transparent;
+  color: $text-muted;
+  border: none;
+  border-radius: $radius-sm;
+  font-size: 1.5rem;
+  font-family: $font;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+  text-align: left;
+
+  .nav-icon {
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &:hover {
+    background-color: $surface-2;
+    color: $white;
+  }
+
+  &.active {
+    background-color: $primary-glow;
+    color: $primary;
+    font-weight: 600;
+
+    .nav-icon { filter: none; }
+  }
+}

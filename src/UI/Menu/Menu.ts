@@ -1,4 +1,4 @@
-import { View } from "../../core/interfaces/View";
+import { ConsoleView } from "../View/ConsoleView";
 import { LibrarySystem } from "../../core/LibrarySystem";
 import { MenuOption } from "./MenuOption";
 import { MenuActions } from "./MenuActions";
@@ -8,7 +8,7 @@ export class Menu {
     private running = true;
 
     constructor(
-        private view: View,
+        private view: ConsoleView,
         private library: LibrarySystem
     ) {
         this.buildOptions();
@@ -18,29 +18,29 @@ export class Menu {
         const actions = new MenuActions(this.view, this.library);
 
         this.options = [
-            new MenuOption("1", "Registrar libro", () => actions.registerBook()),
-            new MenuOption("2", "Borrar libro", () => actions.deleteBook()),
-            new MenuOption("3", "Registrar estudiante", () => actions.registerStudent()),
-            new MenuOption("4", "Borrar estudiante", () => actions.deleteStudent()),
-            new MenuOption("5", "Realizar préstamo", () => actions.loanBook()),
-            new MenuOption("6", "Devolver Libro", () => actions.returnBook()),
-            new MenuOption("7", "Borrar préstamo", () => actions.deleteLoan()),  // NUEVA OPCIÓN
-            new MenuOption("8", "Mostrar libros", () => actions.showBooks()),
-            new MenuOption("9", "Mostrar estudiantes", () => actions.showStudents()),
-            new MenuOption("10", "Ver préstamos activos por estudiante", () => actions.showActiveLoansByStudent()),
-            new MenuOption("0", "Salir", () => this.exit())
+            new MenuOption("1",  "Registrar libro",                          () => actions.registerBook()),
+            new MenuOption("2",  "Borrar libro",                             () => actions.deleteBook()),
+            new MenuOption("3",  "Registrar estudiante",                     () => actions.registerStudent()),
+            new MenuOption("4",  "Borrar estudiante",                        () => actions.deleteStudent()),
+            new MenuOption("5",  "Realizar préstamo",                        () => actions.loanBook()),
+            new MenuOption("6",  "Devolver libro",                           () => actions.returnBook()),
+            new MenuOption("7",  "Borrar préstamo",                          () => actions.deleteLoan()),
+            new MenuOption("8",  "Mostrar libros",                           () => actions.showBooks()),
+            new MenuOption("9",  "Mostrar estudiantes",                      () => actions.showStudents()),
+            new MenuOption("10", "Ver préstamos activos por estudiante",     () => actions.showActiveLoansByStudent()),
+            new MenuOption("0",  "Salir",                                    () => this.exit()),
         ];
     }
 
-    start(): void {
+    async start(): Promise<void> {
         while (this.running) {
             this.printMenu();
-            const input = this.view.readInput();
-            this.executeOption(input);
+            const input = await this.view.readInput();
+            await this.executeOption(input);
 
             if (this.running) {
                 this.view.showMessage("\nPresiona cualquier tecla para continuar...");
-                this.view.readInput();
+                await this.view.readInput();
             }
         }
     }
@@ -52,10 +52,10 @@ export class Menu {
         this.view.showMessage("\nOpción: ");
     }
 
-    private executeOption(input: string): void {
+    private async executeOption(input: string): Promise<void> {
         const option = this.options.find(opt => opt.matches(input));
         if (option) {
-            option.action();
+            await option.action();
         } else {
             this.view.showMessage("Opción inválida.");
         }

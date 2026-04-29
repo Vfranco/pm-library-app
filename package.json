@@ -4,6 +4,9 @@
   "description": "Biblioteca",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --config webpack.config.ts --env target=web",
+    "build:console": "webpack --config webpack.config.ts --env target=console",
+    "dev": "webpack serve --config webpack.config.ts --env target=web",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,12 +23,22 @@
   },
   "homepage": "https://github.com/Vfranco/pm-library-app#readme",
   "devDependencies": {
-    "@types/node": "^24.10.1",
+    "@types/jsdom": "^28.0.1",
+    "@types/node": "^25.6.0",
+    "css-loader": "^7.1.4",
+    "html-loader": "^5.1.0",
+    "html-webpack-plugin": "^5.6.7",
+    "jsdom": "^29.1.0",
+    "mini-css-extract-plugin": "^2.9.2",
+    "sass": "^1.99.0",
+    "sass-loader": "^16.0.7",
+    "style-loader": "^4.0.0",
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "webpack": "^5.102.1",
-    "webpack-cli": "^6.0.1"
+    "webpack-cli": "^7.0.2",
+    "webpack-dev-server": "^5.2.3"
   },
   "dependencies": {
     "scanf": "^1.2.0"

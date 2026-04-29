@@ -1,0 +1,65 @@
+@use '../globals/variables' as *;
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    tr {
+      border-bottom: 0.1rem solid $border-light;
+    }
+
+    th {
+      padding: 1.2rem 1.6rem;
+      text-align: left;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 0.1rem solid $border;
+      transition: background-color 0.12s;
+
+      &:last-child { border-bottom: none; }
+
+      &:hover:not(.empty-row) {
+        background-color: $surface-2;
+      }
+    }
+
+    td {
+      padding: 1.4rem 1.6rem;
+      font-size: 1.5rem;
+      color: $text;
+      vertical-align: middle;
+
+      code {
+        font-family: 'Courier New', monospace;
+        font-size: 1.2rem;
+        color: $primary;
+        background-color: $primary-glow;
+        padding: 0.2rem 0.6rem;
+        border-radius: $radius-xs;
+      }
+    }
+  }
+
+  .empty-row td {
+    text-align: center;
+    color: $text-dim;
+    font-style: italic;
+    padding: 4rem;
+    font-size: 1.5rem;
+  }
+
+  .actions-cell {
+    display: flex;
+    gap: 0.8rem;
+  }
+}

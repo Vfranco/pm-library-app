@@ -1,0 +1,47 @@
+@use '../globals/variables' as *;
+
+#main-content {
+  padding: 2.4rem 3.2rem 4rem;
+  flex: 1;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &[hidden] { display: none; }
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.6rem;
+  border-bottom: 0.1rem solid $border;
+}
+
+.card {
+  background-color: $surface;
+  border: 0.1rem solid $border;
+  border-radius: $radius;
+  overflow: hidden;
+}
+
+.form-card {
+  padding: 2.4rem;
+  background-color: $surface-2;
+  border: 0.1rem solid $border;
+  border-radius: $radius;
+
+  h3 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $white;
+    margin-bottom: 2rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 0.1rem solid $border;
+  }
+
+  &[hidden] { display: none; }
+}

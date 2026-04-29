@@ -1,0 +1,52 @@
+// Paleta base
+
+$bg: #0f1117; // fondo principal oscuro
+$surface: #1a1d27; // tarjetas y paneles
+$surface-2: #22263a; // superficies elevadas
+$border: #2e3347; // bordes sutiles
+$border-light: #3a4060; // bordes con más contraste
+
+// Colores de marca
+
+$primary: #c9a84c; // dorado elegante
+$primary-dim: #a8893a; // dorado oscurecido para hover
+$primary-glow: rgba(#c9a84c, 0.15);
+
+// Texto
+
+$white: #eef0f6; // blanco suave
+$text: #c8ccd8; // texto principal
+$text-muted: #6b7280; // texto secundario
+$text-dim: #4b5263; // texto muy apagado
+
+// Semánticos
+
+$success: #34d399;
+$danger: #f87171;
+$warning: #fbbf24;
+
+// Tipografía
+
+$font: "Roboto Slab", system-ui, sans-serif;
+
+// Forma
+
+$radius: 1rem;
+$radius-sm: 0.6rem;
+$radius-xs: 0.3rem;
+
+// Sombras
+
+$shadow: 0 0.2rem 1.2rem rgba(0, 0, 0, 0.3);
+$shadow-lg: 0 0.8rem 3.2rem rgba(0, 0, 0, 0.5);
+$shadow-glow: 0 0 2rem rgba(#c9a84c, 0.12);
+
+// Sidebar
+
+$sidebar-w: 24rem;
+$sidebar-w-slim: 7rem; // tablet: solo iconos
+
+// Breakpoints
+
+$bp-mobile: 768px;
+$bp-tablet: 1024px;
