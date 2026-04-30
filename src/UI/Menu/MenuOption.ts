@@ -2,7 +2,7 @@ export class MenuOption {
     constructor(
         public readonly key: string,
         public readonly label: string,
-        public readonly action: () => void
+        public readonly action: () => void | Promise<void>
     ) { }
 
     matches(input: string): boolean {

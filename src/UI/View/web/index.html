@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Biblioteca Virtual</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div id="login-screen" hidden>
+            <div id="login-backdrop">
+                <div id="login-left">
+                    <span class="login-brand-icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M4 19V6a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v13"
+                            />
+                            <path d="M4 19a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-1" />
+                            <path d="M8 7h6" />
+                            <path d="M8 11h8" />
+                            <path d="M8 15h5" />
+                        </svg>
+                    </span>
+                    <span class="login-brand-name">PM<br />Library</span>
+                    <div class="login-brand-divider"></div>
+                    <p class="login-brand-desc">
+                        Sistema de gestión de libros, estudiantes y préstamos.
+                        Acceso exclusivo para administradores.
+                    </p>
+                </div>
+
+                <div id="login-right">
+                    <div id="login-card">
+                        <div class="login-heading">
+                            <h2>Bienvenido</h2>
+                            <p>Ingresa tus credenciales para continuar</p>
+                        </div>
+
+                        <form id="login-form" novalidate>
+                            <div class="field">
+                                <label for="login-username">Usuario</label>
+                                <input
+                                    type="text"
+                                    id="login-username"
+                                    autocomplete="username"
+                                    placeholder="Ej: admin"
+                                    required
+                                />
+                            </div>
+                            <div class="field">
+                                <label for="login-password">Contraseña</label>
+                                <input
+                                    type="password"
+                                    id="login-password"
+                                    autocomplete="current-password"
+                                    placeholder="••••••••"
+                                    required
+                                />
+                            </div>
+
+                            <p id="login-error" class="login-error" hidden>
+                                Usuario o contraseña incorrectos.
+                            </p>
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary btn-block"
+                            >
+                                Ingresar
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="app-screen" hidden>
+            <aside id="sidebar">
+                <div class="sidebar-brand">
+                    <span class="brand-icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path
+                                d="M4 19V6a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v13"
+                            />
+                            <path d="M4 19a2 2 0 0 0 2 2h13a1 1 0 0 0 1-1v-1" />
+                            <path d="M8 7h6" />
+                            <path d="M8 11h8" />
+                            <path d="M8 15h5" />
+                        </svg>
+                    </span>
+                    <span class="brand-name">PM Library</span>
+                    <span class="brand-sub">Sistema de gestión</span>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <button
+                        class="nav-btn active"
+                        data-section="books"
+                        data-label="Libros"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                                <path
+                                    d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                                />
+                            </svg>
+                        </span>
+                        Libros
+                    </button>
+                    <button
+                        class="nav-btn"
+                        data-section="students"
+                        data-label="Estudiantes"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
+                            </svg>
+                        </span>
+                        Estudiantes
+                    </button>
+                    <button
+                        class="nav-btn"
+                        data-section="loans"
+                        data-label="Préstamos"
+                    >
+                        <span class="nav-icon">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path
+                                    d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"
+                                />
+                            </svg>
+                        </span>
+                        Préstamos
+                    </button>
+                </nav>
+
+                <div class="sidebar-footer">
+                    <span class="sidebar-user">Administrador</span>
+                    <button id="btn-logout" class="btn btn-ghost btn-sm">
+                        Salir
+                    </button>
+                </div>
+            </aside>
+
+            <div id="app-wrapper">
+                <div id="toast" aria-live="polite"></div>
+
+                <main id="main-content">
+                    <section id="section-books" class="section">
+                        <div class="section-header">
+                            <div>
+                                <h2 class="page-title">Libros</h2>
+                                <p class="page-subtitle">
+                                    Gestiona el catálogo de la biblioteca
+                                </p>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                id="btn-open-add-book"
+                            >
+                                + Agregar libro
+                            </button>
+                        </div>
+
+                        <div class="form-card" id="form-add-book" hidden>
+                            <h3>Nuevo libro</h3>
+                            <form id="add-book-form">
+                                <div class="field">
+                                    <label for="book-title">Título</label>
+                                    <input
+                                        type="text"
+                                        id="book-title"
+                                        required
+                                        placeholder="Ej: El Quijote"
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="book-author">Autor</label>
+                                    <input
+                                        type="text"
+                                        id="book-author"
+                                        required
+                                        placeholder="Ej: Cervantes"
+                                    />
+                                </div>
+                                <div class="form-actions">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Guardar
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-ghost"
+                                        id="btn-cancel-add-book"
+                                    >
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Título</th>
+                                        <th>Autor</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="books-tbody">
+                                    <tr class="empty-row">
+                                        <td colspan="5">
+                                            No hay libros registrados.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="section-students" class="section" hidden>
+                        <div class="section-header">
+                            <div>
+                                <h2 class="page-title">Estudiantes</h2>
+                                <p class="page-subtitle">
+                                    Registro de estudiantes activos
+                                </p>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                id="btn-open-add-student"
+                            >
+                                + Agregar estudiante
+                            </button>
+                        </div>
+
+                        <div class="form-card" id="form-add-student" hidden>
+                            <h3>Nuevo estudiante</h3>
+                            <form id="add-student-form">
+                                <div class="field">
+                                    <label for="student-name"
+                                        >Nombre completo</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="student-name"
+                                        required
+                                        placeholder="Ej: Ana García"
+                                    />
+                                </div>
+                                <div class="field">
+                                    <label for="student-id"
+                                        >Número de documento</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="student-id"
+                                        required
+                                        placeholder="Ej: 12345678"
+                                    />
+                                </div>
+                                <div class="form-actions">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Guardar
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-ghost"
+                                        id="btn-cancel-add-student"
+                                    >
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="students-tbody">
+                                    <tr class="empty-row">
+                                        <td colspan="3">
+                                            No hay estudiantes registrados.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="section-loans" class="section" hidden>
+                        <div class="section-header">
+                            <div>
+                                <h2 class="page-title">Préstamos</h2>
+                                <p class="page-subtitle">
+                                    Control de préstamos activos y devueltos
+                                </p>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                id="btn-open-add-loan"
+                            >
+                                + Nuevo préstamo
+                            </button>
+                        </div>
+
+                        <div class="form-card" id="form-add-loan" hidden>
+                            <h3>Nuevo préstamo</h3>
+                            <form id="add-loan-form">
+                                <div class="field">
+                                    <label for="loan-student-id"
+                                        >Estudiante</label
+                                    >
+                                    <select id="loan-student-id" required>
+                                        <option value="">
+                                            Selecciona un estudiante…
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <label for="loan-book-id"
+                                        >Libro disponible</label
+                                    >
+                                    <select id="loan-book-id" required>
+                                        <option value="">
+                                            Selecciona un libro…
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-actions">
+                                    <button
+                                        type="submit"
+                                        class="btn btn-primary"
+                                    >
+                                        Registrar préstamo
+                                    </button>
+                                    <button
+                                        type="button"
+                                        class="btn btn-ghost"
+                                        id="btn-cancel-add-loan"
+                                    >
+                                        Cancelar
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="card">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Estudiante</th>
+                                        <th>Libro</th>
+                                        <th>Fecha</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="loans-tbody">
+                                    <tr class="empty-row">
+                                        <td colspan="6">
+                                            No hay préstamos registrados.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+    </body>
+</html>

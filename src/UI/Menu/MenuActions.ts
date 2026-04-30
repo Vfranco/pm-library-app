@@ -1,18 +1,18 @@
-import { View } from "../../core/interfaces/View";
+import { ConsoleView } from "../View/ConsoleView";
 import { LibrarySystem } from "../../core/LibrarySystem";
 
 export class MenuActions {
     constructor(
-        private view: View,
+        private view: ConsoleView,
         private library: LibrarySystem
     ) { }
 
-    registerBook(): void {
+    async registerBook(): Promise<void> {
         try {
             this.view.showMessage("Título del libro: ");
-            const title = this.view.readInput();
+            const title = await this.view.readInput();
             this.view.showMessage("Autor del libro: ");
-            const author = this.view.readInput();
+            const author = await this.view.readInput();
 
             this.library.books.register(title, author);
             this.view.showMessage("Libro registrado exitosamente.");
@@ -21,11 +21,11 @@ export class MenuActions {
         }
     }
 
-    deleteBook(): void {
+    async deleteBook(): Promise<void> {
         try {
             this.showBooks();
             this.view.showMessage("ID del libro a borrar: ");
-            const id = this.view.readInput();
+            const id = await this.view.readInput();
 
             this.library.books.delete(id);
             this.view.showMessage("Libro borrado exitosamente.");
@@ -34,12 +34,12 @@ export class MenuActions {
         }
     }
 
-    registerStudent(): void {
+    async registerStudent(): Promise<void> {
         try {
             this.view.showMessage("Nombre del estudiante: ");
-            const name = this.view.readInput();
+            const name = await this.view.readInput();
             this.view.showMessage("Número de documento del estudiante: ");
-            const id = this.view.readInput();
+            const id = await this.view.readInput();
 
             this.library.students.register(name, id);
             this.view.showMessage("Estudiante registrado exitosamente.");
@@ -48,11 +48,11 @@ export class MenuActions {
         }
     }
 
-    deleteStudent(): void {
+    async deleteStudent(): Promise<void> {
         try {
             this.showStudents();
             this.view.showMessage("ID del estudiante a borrar: ");
-            const id = this.view.readInput();
+            const id = await this.view.readInput();
 
             this.library.students.delete(id);
             this.view.showMessage("Estudiante borrado exitosamente.");
@@ -61,15 +61,15 @@ export class MenuActions {
         }
     }
 
-    loanBook(): void {
+    async loanBook(): Promise<void> {
         try {
             this.showStudents();
             this.view.showMessage("ID del estudiante: ");
-            const studentId = this.view.readInput();
+            const studentId = await this.view.readInput();
 
             this.showBooks();
             this.view.showMessage("ID del libro: ");
-            const bookId = this.view.readInput();
+            const bookId = await this.view.readInput();
 
             this.library.loanBook(studentId, bookId);
             this.view.showMessage("Préstamo realizado exitosamente.");
@@ -78,7 +78,7 @@ export class MenuActions {
         }
     }
 
-    deleteLoan(): void {
+    async deleteLoan(): Promise<void> {
         try {
             const allLoans = this.library.loans.getAll();
 
@@ -90,7 +90,7 @@ export class MenuActions {
             this.view.showLoanList(allLoans);
 
             this.view.showMessage("\nID del préstamo a borrar: ");
-            const id = this.view.readInput();
+            const id = await this.view.readInput();
 
             this.library.loans.delete(id);
             this.view.showMessage("Préstamo borrado exitosamente.");
@@ -109,11 +109,11 @@ export class MenuActions {
         this.view.showStudentList(students);
     }
 
-    showActiveLoansByStudent(): void {
+    async showActiveLoansByStudent(): Promise<void> {
         try {
             this.showStudents();
             this.view.showMessage("\nID del estudiante: ");
-            const studentId = this.view.readInput();
+            const studentId = await this.view.readInput();
 
             const student = this.library.students.getById(studentId);
 
@@ -136,11 +136,11 @@ export class MenuActions {
         }
     }
 
-    returnBook(): void {
+    async returnBook(): Promise<void> {
         try {
             this.showStudents();
             this.view.showMessage("\nID del estudiante: ");
-            const studentId = this.view.readInput();
+            const studentId = await this.view.readInput();
 
             const student = this.library.students.getById(studentId);
             if (!student) {
@@ -158,7 +158,7 @@ export class MenuActions {
             this.view.showLoanList(activeLoans);
 
             this.view.showMessage("\nID del préstamo a retornar: ");
-            const loanId = this.view.readInput();
+            const loanId = await this.view.readInput();
 
             this.library.returnBook(loanId);
             this.view.showMessage("Libro retornado exitosamente.");

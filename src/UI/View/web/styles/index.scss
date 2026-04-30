@@ -1,0 +1,20 @@
+// Globales
+@use "globals/variables";
+@use "globals/functions";
+@use "globals/reset";
+
+// Layout
+@use "layout/header";
+@use "layout/nav";
+@use "layout/sections";
+@use "layout/login";
+@use "layout/responsive"; // siempre al final del bloque layout
+
+// Tablas
+@use "tables/data-table";
+@use "tables/badges";
+
+// Utilidades
+@use "forms/fields";
+@use "forms/buttons";
+@use "forms/toast";

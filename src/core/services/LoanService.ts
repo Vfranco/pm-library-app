@@ -2,18 +2,13 @@ import { Loan } from "../entities/Loan";
 import { Repository } from "../interfaces/Repository";
 import { IdGenerator } from "../interfaces/IdGenerator";
 import { DateProvider } from "../interfaces/DateProvider";
-import { Service } from "../interfaces/Service";
 
-export class LoanService implements Service<Loan> {
+export class LoanService {
     constructor(
         private repository: Repository<Loan>,
         private idGenerator: IdGenerator,
         private dateProvider: DateProvider
     ) { }
-
-    register(studentId: string, bookId: string): Loan {
-        return this.createLoan(studentId, bookId);
-    }
 
     createLoan(studentId: string, bookId: string): Loan {
         const loan = new Loan(

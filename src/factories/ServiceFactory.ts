@@ -1,4 +1,3 @@
-import { Service } from "../core/interfaces/Service";
 import { BookService } from "../core/services/BookService";
 import { StudentService } from "../core/services/StudentService";
 import { LoanService } from "../core/services/LoanService";
@@ -25,7 +24,7 @@ export class ServiceFactory {
         this.dependencies.set(LoanService, [this.idGenerator, this.dateProvider]);
     }
 
-    createService<T extends Service<any>>(ServiceClass: new (...args: any[]) => T): T {
+    createService<T>(ServiceClass: new (...args: any[]) => T): T {
         const repository = this.repositoryFactory.createRepository();
         const deps = this.dependencies.get(ServiceClass) || [];
         return new ServiceClass(repository, ...deps);

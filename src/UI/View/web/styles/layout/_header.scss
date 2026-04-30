@@ -1,0 +1,88 @@
+@use "../globals/variables" as *;
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: $sidebar-w;
+    height: 100vh;
+    background-color: $surface;
+    border-right: 0.1rem solid $border;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.sidebar-brand {
+    padding: 3.2rem 2.4rem 2.4rem;
+    border-bottom: 0.1rem solid $border;
+
+    .brand-icon {
+        width: 3.6rem;
+        height: 3.6rem;
+        color: $primary;
+        display: block;
+        margin-bottom: 1.2rem;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .brand-name {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $primary;
+        letter-spacing: -0.02em;
+        display: block;
+    }
+
+    .brand-sub {
+        font-size: 1.2rem;
+        color: $text-muted;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-top: 0.2rem;
+        display: block;
+    }
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 2rem 2.4rem;
+    border-top: 0.1rem solid $border;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .sidebar-user {
+        font-size: 1.3rem;
+        color: $text-muted;
+    }
+}
+
+#app-wrapper {
+    margin-left: $sidebar-w;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#page-header {
+    padding: 2.4rem 3.2rem 0;
+
+    .page-title {
+        font-size: 2.8rem;
+        font-weight: 700;
+        color: $white;
+        letter-spacing: -0.02em;
+    }
+
+    .page-subtitle {
+        font-size: 1.4rem;
+        color: $text-muted;
+        margin-top: 0.4rem;
+    }
+}
