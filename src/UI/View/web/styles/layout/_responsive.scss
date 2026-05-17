@@ -44,11 +44,29 @@
     .nav-icon {
       width: 2.2rem;
       height: 2.2rem;
+
+      // Fuerza el color del SVG para que sea visible
+      svg {
+        stroke: $text-muted;
+      }
     }
 
     // El color del icono sigue funcionando
-    &:hover    { color: $white; }
-    &.active   { color: $primary; }
+    &:hover {
+      color: $white;
+      
+      .nav-icon svg {
+        stroke: $white;
+      }
+    }
+    
+    &.active {
+      color: $primary;
+      
+      .nav-icon svg {
+        stroke: $primary;
+      }
+    }
   }
 
   .sidebar-footer {
@@ -122,24 +140,51 @@
     border-radius: 0;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 0; // Oculta el texto original del HTML
     color: $text-muted;
 
-    // Muestra texto pequeño bajo el icono
+    // Muestra texto pequeño bajo el icono usando data-label
     &::after {
       content: attr(data-label);
       font-size: 1rem;
       font-family: $font;
       font-weight: 500;
+      color: $text-muted;
     }
 
     .nav-icon {
       width: 2.2rem;
       height: 2.2rem;
+
+      svg {
+        stroke: $text-muted;
+      }
     }
 
-    &:hover  { color: $white; }
-    &.active { color: $primary; background-color: transparent; }
+    &:hover {
+      color: $white;
+      
+      &::after {
+        color: $white;
+      }
+      
+      .nav-icon svg {
+        stroke: $white;
+      }
+    }
+    
+    &.active {
+      color: $primary;
+      background-color: transparent;
+      
+      &::after {
+        color: $primary;
+      }
+      
+      .nav-icon svg {
+        stroke: $primary;
+      }
+    }
   }
 
   // Contenido ocupa todo el ancho, con padding inferior para la nav bar

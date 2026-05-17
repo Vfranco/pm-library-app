@@ -8,25 +8,26 @@ import { BookValidator } from "../core/validators/BookValidator";
 import { StudentValidator } from "../core/validators/StudentValidator";
 
 export class ServiceFactory {
-    private dependencies: Map<any, any[]>;
+  private dependencies: Map<any, any[]>;
 
-    constructor(
-        private repositoryFactory: RepositoryFactory,
-        private idGenerator: IdGenerator,
-        private dateProvider: DateProvider
-    ) {
-        const bookValidator = new BookValidator();
-        const studentValidator = new StudentValidator();
+  constructor(
+    private repositoryFactory: RepositoryFactory,
+    private idGenerator: IdGenerator,
+    private dateProvider: DateProvider,
+  ) {
+    const bookValidator = new BookValidator();
+    const studentValidator = new StudentValidator();
 
-        this.dependencies = new Map();
-        this.dependencies.set(BookService, [this.idGenerator, bookValidator]);
-        this.dependencies.set(StudentService, [studentValidator]);
-        this.dependencies.set(LoanService, [this.idGenerator, this.dateProvider]);
-    }
+    this.dependencies = new Map();
+    this.dependencies.set(BookService, [this.idGenerator, bookValidator]);
+    this.dependencies.set(StudentService, [studentValidator]);
+    this.dependencies.set(LoanService, [this.idGenerator, this.dateProvider]);
+  }
 
-    createService<T>(ServiceClass: new (...args: any[]) => T): T {
-        const repository = this.repositoryFactory.createRepository();
-        const deps = this.dependencies.get(ServiceClass) || [];
-        return new ServiceClass(repository, ...deps);
-    }
+  createService<T>(ServiceClass: new (...args: any[]) => T): T {
+    const entityName = (ServiceClass as any).entityName;
+    const repository = this.repositoryFactory.createRepository(entityName);
+    const deps = this.dependencies.get(ServiceClass) || [];
+    return new ServiceClass(repository, ...deps);
+  }
 }
