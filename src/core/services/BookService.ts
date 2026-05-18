@@ -5,49 +5,51 @@ import { BookValidator } from "../validators/BookValidator";
 import { Service } from "../interfaces/Service";
 
 export class BookService implements Service<Book> {
-    constructor(
-        private repository: Repository<Book>,
-        private idGenerator: IdGenerator,
-        private validator: BookValidator
-    ) { }
+  static readonly entityName = "books";
 
-    register(title: string, author: string): Book {
-        this.validator.validate(title, author);
+  constructor(
+    private repository: Repository<Book>,
+    private idGenerator: IdGenerator,
+    private validator: BookValidator,
+  ) {}
 
-        const book = new Book(
-            this.idGenerator.generate(),
-            title.trim(),
-            author.trim(),
-            true
-        );
+  register(title: string, author: string): Book {
+    this.validator.validate(title, author);
 
-        this.repository.save(book);
-        return book;
+    const book = new Book(
+      this.idGenerator.generate(),
+      title.trim(),
+      author.trim(),
+      true,
+    );
+
+    this.repository.save(book);
+    return book;
+  }
+
+  delete(id: string): void {
+    const book = this.repository.getById(id);
+    if (!book) {
+      throw new Error("Libro no encontrado");
     }
+    this.repository.delete(id);
+  }
 
-    delete(id: string): void {
-        const book = this.repository.getById(id);
-        if (!book) {
-            throw new Error("Libro no encontrado");
-        }
-        this.repository.delete(id);
-    }
+  getById(id: string): Book | null {
+    return this.repository.getById(id);
+  }
 
-    getById(id: string): Book | null {
-        return this.repository.getById(id);
-    }
+  getAll(): Book[] {
+    return this.repository.getAll();
+  }
 
-    getAll(): Book[] {
-        return this.repository.getAll();
-    }
+  markAsUnavailable(book: Book): void {
+    book.available = false;
+    this.repository.update(book);
+  }
 
-    markAsUnavailable(book: Book): void {
-        book.available = false;
-        this.repository.update(book);
-    }
-
-    markAsAvailable(book: Book): void {
-        book.available = true;
-        this.repository.update(book);
-    }
+  markAsAvailable(book: Book): void {
+    book.available = true;
+    this.repository.update(book);
+  }
 }

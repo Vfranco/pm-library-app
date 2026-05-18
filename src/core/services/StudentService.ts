@@ -4,37 +4,39 @@ import { StudentValidator } from "../validators/StudentValidator";
 import { Service } from "../interfaces/Service";
 
 export class StudentService implements Service<Student> {
-    constructor(
-        private repository: Repository<Student>,
-        private validator: StudentValidator
-    ) { }
+  static readonly entityName = "students";
 
-    register(name: string, id: string): Student {
-        this.validator.validate(name, id);
+  constructor(
+    private repository: Repository<Student>,
+    private validator: StudentValidator,
+  ) {}
 
-        const existingStudent = this.repository.getById(id);
-        if (existingStudent) {
-            throw new Error("Ya existe un estudiante con ese ID");
-        }
+  register(name: string, id: string): Student {
+    this.validator.validate(name, id);
 
-        const student = new Student(id.trim(), name.trim());
-
-        this.repository.save(student);
-        return student;
+    const existingStudent = this.repository.getById(id);
+    if (existingStudent) {
+      throw new Error("Ya existe un estudiante con ese ID");
     }
 
-    delete(id: string): void {
-        if (!this.repository.getById(id)) {
-            throw new Error("ID de estudiante no encontrado");
-        }
-        this.repository.delete(id);
-    }
+    const student = new Student(id.trim(), name.trim());
 
-    getById(id: string): Student | null {
-        return this.repository.getById(id);
-    }
+    this.repository.save(student);
+    return student;
+  }
 
-    getAll(): Student[] {
-        return this.repository.getAll();
+  delete(id: string): void {
+    if (!this.repository.getById(id)) {
+      throw new Error("ID de estudiante no encontrado");
     }
+    this.repository.delete(id);
+  }
+
+  getById(id: string): Student | null {
+    return this.repository.getById(id);
+  }
+
+  getAll(): Student[] {
+    return this.repository.getAll();
+  }
 }
